@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+/*
+ * پی‌نو design tokens — calm, trustworthy, mobile-first fintech.
+ * Status colors are always paired with an icon/label (never color alone).
+ */
+@theme {
+  --font-sans: 'Vazirmatn Variable', Vazirmatn, Tahoma, system-ui, sans-serif;
+
+  --color-canvas: #f3f5f7;
+  --color-surface: #ffffff;
+  --color-ink: #101828;
+  --color-ink-soft: #344054;
+  --color-muted: #667085;
+  --color-line: #e4e7ec;
+  --color-line-soft: #eef0f3;
+
+  --color-brand-50: #eaf6f4;
+  --color-brand-100: #cfece7;
+  --color-brand-500: #14907f;
+  --color-brand-600: #0f7a6c;
+  --color-brand-700: #0c6358;
+  --color-brand-800: #0a4f47;
+
+  --color-paid-50: #ecfdf3;
+  --color-paid-600: #067647;
+
+  --color-late-50: #fff8eb;
+  --color-late-100: #feefc6;
+  --color-late-300: #fdd682;
+  --color-late-700: #93370d;
+
+  --color-danger-50: #fef3f2;
+  --color-danger-600: #d92d20;
+  --color-danger-700: #b42318;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-sheet: 0 -8px 32px rgb(16 24 40 / 0.16);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: 'ss01';
+  }
+
+  /* Clear, consistent keyboard focus */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  dialog::backdrop {
+    background: rgb(16 24 40 / 0.45);
+  }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+@utility safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}
+
+.animate-sheet-up {
+  animation: sheet-up 180ms ease-out;
+}
+
+.skeleton {
+  background: var(--color-line-soft);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet-up,
+  .skeleton {
+    animation: none;
+  }
+}

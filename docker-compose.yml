@@ -1,0 +1,15 @@
+# Optional local PostgreSQL for development: `docker compose up -d`
+# then set DATABASE_URL=postgres://peyno:peyno@localhost:5432/peyno
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: peyno
+      POSTGRES_PASSWORD: peyno
+      POSTGRES_DB: peyno
+    ports:
+      - '5432:5432'
+    volumes:
+      - peyno-db:/var/lib/postgresql/data
+volumes:
+  peyno-db:
